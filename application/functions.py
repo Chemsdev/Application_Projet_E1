@@ -10,9 +10,6 @@ load_dotenv()
 api_key = os.environ.get("API_PASSWORD")
 
 
-
-
-
 # ==============================================================================>
 # Fonction permettent de vérifier un input est vide.
 def check_form(features:list):

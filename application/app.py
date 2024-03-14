@@ -65,7 +65,6 @@ def main():
             data_preprocess = call_API_preprocessing(api_key=api_key, list_data=features)
             st.write(data_preprocess)
              
-              
         else:
             st.title("")
             css_texte(color="#003f62", size="23px", texte="Veuillez remplir tous le formulaire !")
