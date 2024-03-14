@@ -2,7 +2,7 @@ import streamlit as st
 from front import *
 from options import *
 from functions import *
-from preprocessing import *
+import requests
 
 def main():
     
@@ -33,7 +33,7 @@ def main():
         st.title("")
         niveau_education     = st.selectbox("**Niveau d'éducation**", values_niveau_education, key=10)
         type_de_job          = st.selectbox("**Type de job**", values_type_job, key=5)
-        acces_telephone      = st.selectbox("**Accès au téléphone**",["Oui", "Non"], key=2)
+        acces_au_telephone      = st.selectbox("**Accès au téléphone**",["Oui", "Non"], key=2)
         type_de_localisation = st.selectbox("**Type de localisation**", ("Urban", "Rural"), key=1)
         annee                = st.selectbox("**Année**", values_annee, key=7)
     
@@ -44,9 +44,8 @@ def main():
         features = [
             sexe,
             type_de_localisation, 
-            acces_telephone,
+            acces_au_telephone,
             pays, 
-            age,
             etat_civil,
             type_de_job, 
             relation_famille,
@@ -57,24 +56,19 @@ def main():
         ]
         
         # Vérification si tous les champs sont remplis.
-        # if check_form(features=features):
-        preprocessing(features=features)
+        if check_form(features=features):
             
-        #     # TODO : Preprocessing, Insertion des données, Modeling...
-        #     send_data(features=features)
-        #     end_form = True
-            
-            
-            
-        # else:
-        #     st.title("")
-        #     css_texte(color="#003f62", size="23px", texte="Veuillez remplir tous le formulaire !")
-        
-        
-        
-        
-        
-        
+            # Vérification faite, fin du formulaire.
+            end_form = True
+            call_API_init_database(api_key=api_key)
+            call_API_insert_data(api_key=api_key,   list_data=features)
+            data_preprocess = call_API_preprocessing(api_key=api_key, list_data=features)
+            st.write(data_preprocess)
+             
+              
+        else:
+            st.title("")
+            css_texte(color="#003f62", size="23px", texte="Veuillez remplir tous le formulaire !")
         
     # ================================================== Prediction ==================================================
     
