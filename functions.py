@@ -10,7 +10,7 @@ import pandas as pd
 # Récupération du mot de passe API.   
 load_dotenv()
 api_key = os.environ.get("API_PASSWORD")
-url     = os.environ.get("URL")
+url     = os.environ.get("URL_AZURE")
 
 # ==============================================================================>
 # Fonction permettent de vérifier un input est vide.
