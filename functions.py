@@ -19,7 +19,7 @@ def check_form(features:list):
     return True 
 # ==============================================================================>
 def call_API_init_database(api_key=api_key):
-    response = requests.post(url=f"http://127.0.0.1:8000/database_init/?api_key={api_key}")
+    response = requests.post(url=f"https://webappfinancialinclusionchems.azurewebsites.net/database_init/?api_key={api_key}")
     if response.status_code == 200:
         st.success("Données insérées avec succès.")
     else:
@@ -27,7 +27,7 @@ def call_API_init_database(api_key=api_key):
 # ==============================================================================>
 def call_API_insert_data(list_data:list, api_key=api_key):
     data = {index: valeur for index, valeur in enumerate(list_data)}    
-    response = requests.post(url=f"http://127.0.0.1:8000/insert_data_db/?api_key={api_key}", json=data)
+    response = requests.post(url=f"https://webappfinancialinclusionchems.azurewebsites.net/insert_data_db/?api_key={api_key}", json=data)
     if response.status_code == 200:
         st.success("Données insérées avec succès.")
     else:
@@ -35,7 +35,7 @@ def call_API_insert_data(list_data:list, api_key=api_key):
 # ==============================================================================>
 def call_API_preprocessing(list_data:list, api_key=api_key):
     data = {index: valeur for index, valeur in enumerate(list_data)}    
-    response = requests.post(url=f"http://127.0.0.1:8000/preprocess/?api_key={api_key}", json=data)
+    response = requests.post(url=f"https://webappfinancialinclusionchems.azurewebsites.net/preprocess/?api_key={api_key}", json=data)
     if response.status_code == 200:
         st.success("Données insérées avec succès.")
         return response.json()
