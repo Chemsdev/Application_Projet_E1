@@ -60,24 +60,34 @@ def main():
             
             # Vérification faite, fin du formulaire.
             end_form = True
-            call_API_init_database(api_key=api_key)
-            call_API_insert_data(api_key=api_key,   list_data=features)
-            data_preprocess = call_API_preprocessing(api_key=api_key, list_data=features)
-            st.write(data_preprocess)
+            
+            
+            # Appel API
+            call_API_init_database()
+            call_API_insert_data(list_data=features)
+            data_preprocess = call_API_preprocessing(list_data=features)
+            
+            
+            prediction = call_API_model(data=data_preprocess)
+            st.title(prediction)
              
         else:
             st.title("")
             css_texte(color="#003f62", size="23px", texte="Veuillez remplir tous le formulaire !")
         
     # ================================================== Prediction ==================================================
-    
-    if end_form:
-        st.title("")
-        css_texte(color="#AA4A44", size="23px", texte="Désolé, vous ne pouvez pas ouvrir de compte chez nous...")
-        css_predictions(prediction="NON ELIGIBLE", color="#AA4A44")
-        st.title("")
-        css_texte(color="#014b4b", size="23px", texte="Bonne nouvelle ! vous pouvez ouvrir un compte chez nous")
-        css_predictions(prediction="ELIGIBLE",     color="#014b4b")
+    # if end_form:
+    #     css_texte(color="#003f62", size="23px", texte=prediction)
+    #     st.write(len(data_preprocess.values()))
+        
+        # st.title("")
+        # if prediction == "yes":
+        #     css_texte(color="#014b4b", size="23px", texte="Bonne nouvelle ! vous pouvez ouvrir un compte chez nous")
+        #     css_predictions(prediction="ELIGIBLE",     color="#014b4b")
+        # else:
+        #     css_texte(color="#AA4A44", size="23px", texte="Désolé, vous ne pouvez pas ouvrir de compte chez nous...")
+        #     css_predictions(prediction="NON ELIGIBLE", color="#AA4A44")
+
                 
 
 
