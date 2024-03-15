@@ -69,24 +69,20 @@ def main():
             
             
             prediction = call_API_model(data=data_preprocess)
-            st.title(prediction)
              
         else:
             st.title("")
             css_texte(color="#003f62", size="23px", texte="Veuillez remplir tous le formulaire !")
         
     # ================================================== Prediction ==================================================
-    # if end_form:
-    #     css_texte(color="#003f62", size="23px", texte=prediction)
-    #     st.write(len(data_preprocess.values()))
-        
-        # st.title("")
-        # if prediction == "yes":
-        #     css_texte(color="#014b4b", size="23px", texte="Bonne nouvelle ! vous pouvez ouvrir un compte chez nous")
-        #     css_predictions(prediction="ELIGIBLE",     color="#014b4b")
-        # else:
-        #     css_texte(color="#AA4A44", size="23px", texte="Désolé, vous ne pouvez pas ouvrir de compte chez nous...")
-        #     css_predictions(prediction="NON ELIGIBLE", color="#AA4A44")
+    if end_form:
+        st.title("")
+        if prediction == 1.0:
+            css_texte(color="#014b4b", size="23px", texte="Bonne nouvelle ! vous pouvez ouvrir un compte chez nous")
+            css_predictions(prediction="ELIGIBLE",     color="#014b4b")
+        else:
+            css_texte(color="#AA4A44", size="23px", texte="Désolé, vous ne pouvez pas ouvrir de compte chez nous...")
+            css_predictions(prediction="NON ELIGIBLE", color="#AA4A44")
 
                 
 
