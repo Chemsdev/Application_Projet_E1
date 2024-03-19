@@ -90,6 +90,4 @@ def main():
             css_predictions(prediction="NON ELIGIBLE", color="#AA4A44")
 
 
-
-
 main()
