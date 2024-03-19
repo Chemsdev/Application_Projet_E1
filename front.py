@@ -55,19 +55,19 @@ def set_background(png_file):
 # =============================================================>
 
 # Fonction pour ajouter du CSS au bouton.
-def button_css(button:str):
+def button_css(button:str, margin_left="13px"):
     st.markdown(
-        """
+        f"""
         <style>
-            .stButton>button {
+            .stButton>button {{
                 font-weight: bold;
                 background-color: #014b4b; 
                 color: white; 
                 padding: 10px 15px; 
                 border-radius: 5px; 
                 width: 275px;
-                margin-left:13px;
-            }
+                margin-left:{margin_left};
+            }}
         </style>
         """,
         unsafe_allow_html=True
@@ -110,3 +110,84 @@ def css_predictions(prediction, color:str):
         unsafe_allow_html=True
     )
     st.markdown(f"<div class='custom-block'>{prediction}</div>", unsafe_allow_html=True)
+
+# =============================================================>    
+
+# Fonction permettent de change la couleur de la sidebar.
+def side_bar_background():
+    st.markdown("""
+        <style>
+            [data-testid=stSidebar] {
+                background-color: #014b4b;
+            }
+        </style>
+        """, unsafe_allow_html=True)
+
+# =============================================================>    
+
+# Fonction permettent de retirer la bar noir en haut de l'app.
+def delete_bar_of_the_top():
+    hide_decoration_bar_style = '''
+    <style>
+        header {visibility: hidden;}
+    </style>
+    '''
+    st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
+# =============================================================>    
+
+# Fonction permettent d'afficher la prédictions
+def css_recapitulatif(user_inputs):
+    if user_inputs[2] == "Oui":
+        user_inputs[2] = "Joignable au téléphone"
+    else:
+        user_inputs[2] = "Non joignable au téléphone"
+    user_inputs[8] = f"taille de ménage, {user_inputs[8]}"
+    user_inputs[9] = f"{user_inputs[9]} ans"
+    
+    
+    # Etat civil 4
+    # Niveau d'éducation -1
+    # type de job 5
+    
+    if "Ne sais pas" in user_inputs[4]:
+        user_inputs[4] = "Etat civil, non déclaré"
+    
+    if "Ne sais pas" in user_inputs[-1]:
+        user_inputs[-1] = "Niveau d'éducation, non déclaré"
+        
+    if "Ne sait pas" in user_inputs[5]:
+        user_inputs[5] = "Type de job, non déclaré"
+    
+    
+    st.markdown(
+        """
+        <style>
+            .custom-block2 {
+                background: #014b4b;   
+                border-radius: 10px; 
+                color:#white;
+                padding: 15px; 
+                justify-content: center; 
+                align-items: center; 
+                text-align:center;
+                font-weight: bold;
+                width: 410px; 
+                height: 475px;
+                margin-left:145px;
+                font-size: 18px;
+            }
+
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f"""
+        <div class='custom-block2'>
+           <h3 style="color:#d4e8e5";"text-align:center";>Votre récapitulatif</h1>
+            {'<br>'.join([f'{i}<span style=color:#f4ddb1;font-size:21px;></span>' for i in user_inputs])}
+            <p></p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )

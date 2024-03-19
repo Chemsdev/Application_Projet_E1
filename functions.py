@@ -10,7 +10,7 @@ import pandas as pd
 # Récupération du mot de passe API.   
 load_dotenv()
 api_key = os.environ.get("API_PASSWORD")
-url     = os.environ.get("URL_AZURE")
+url     = os.environ.get("URL_LOCAL")
 
 # ==============================================================================>
 # Fonction permettent de vérifier un input est vide.
@@ -54,7 +54,15 @@ def call_API_model(data:dict, api_key=api_key):
     else:
         st.error("Échec de l'exécution du modèle.")
 # ==============================================================================>
-
+def call_API_get_data(api_key=api_key):
+    response = requests.get(url=f"{url}/get_data?api_key={api_key}")
+    if response.status_code == 200:
+        # st.success("Récupération des données réussis")
+        return response.json()
+    else:
+        st.error("Échec de la récupération des données.")
+        st.write(response)
+# ==============================================================================>
 
 
 
