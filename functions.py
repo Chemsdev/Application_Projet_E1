@@ -58,12 +58,23 @@ def call_API_get_data(api_key=api_key):
     response = requests.get(url=f"{url}/get_data?api_key={api_key}")
     if response.status_code == 200:
         # st.success("Récupération des données réussis")
-        return response.json()
+        data = response.json()
+        data = pd.DataFrame(data)
+        return data
     else:
         st.error("Échec de la récupération des données.")
         st.write(response)
 # ==============================================================================>
-
+def call_API_get_data_performance(api_key=api_key):
+    response = requests.get(url=f"{url}/get_performance?api_key={api_key}")
+    if response.status_code == 200:
+        st.success("Récupération des données réussis")
+        data = response.json()
+        data = pd.DataFrame(data)
+        return data
+    else:
+        st.error("Échec de la récupération des données.")
+        st.write(response)
 
 
 

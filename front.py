@@ -144,11 +144,6 @@ def css_recapitulatif(user_inputs):
     user_inputs[8] = f"taille de ménage, {user_inputs[8]}"
     user_inputs[9] = f"{user_inputs[9]} ans"
     
-    
-    # Etat civil 4
-    # Niveau d'éducation -1
-    # type de job 5
-    
     if "Ne sais pas" in user_inputs[4]:
         user_inputs[4] = "Etat civil, non déclaré"
     
