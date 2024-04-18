@@ -13,7 +13,7 @@ def main():
     end_form = False
     col1, col2 = st.columns(2)
     side_bar_background()
-    set_background(png_file="white.jpg")
+    set_background(png_file="background.jpg")
     
     # Formulaire.
     with col1:      
@@ -88,6 +88,5 @@ def main():
             st.title("")
             css_texte(color="#AA4A44", size="23px", texte="Désolé, vous ne pouvez pas ouvrir de compte chez nous...")
             css_predictions(prediction="NON ELIGIBLE", color="#AA4A44")
-
 
 main()
