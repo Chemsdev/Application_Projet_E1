@@ -109,7 +109,7 @@ def show_metrics_performance(data, classe: int):
 
 
 def monitoring():
-    set_background(png_file="beige.jpg")
+    set_background(png_file="background_2.jpg")
     side_bar_background()
     selectbox_css()
     

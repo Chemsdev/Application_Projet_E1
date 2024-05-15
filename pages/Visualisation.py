@@ -15,21 +15,23 @@ def prepare_data_to_viz(data):
     data['Group Age'] = pd.cut(data['age'],
                             bins=[10, 20, 30, 40, 50, 60, 70, 80, np.inf],
                             labels=['10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80+'])
-    mapping = {
+    mapping_etat_civil = {
         'Married/Living together': 'Marié(e)', 
         'Widowed': 'Veuf/Veuve',  
         'Single/Never Married': 'Célibataire',
         'Divorced/Seperated': 'Divorcé(e)',
         "Don't know": 'Ne sais pas'  
     }
-    mapping = {
+    data['etat_civil'].replace(mapping_etat_civil, inplace=True)
+    
+    mapping_sexe = {
         'Female': 'Femme', 
-        'Male'  : 'Homme',  
+        'Male': 'Homme',  
     }
-    data['etat_civil'] = data['etat_civil'].replace(mapping, inplace=True)
-    data['sexe'] = data['sexe'].replace(mapping, inplace=True)
+    data['sexe'].replace(mapping_sexe, inplace=True)
     
     return data
+
 
 # Fonction permettent d'accélerer l'affichage de la données.
 def save_csv_or_get_data():
@@ -116,7 +118,7 @@ def count_plot(y: str, hue: str, colors: str, data, figsize:list, font_size=18):
 # =================================================================================================================================>
 
 def visualisation():
-    set_background(png_file="beige.jpg")
+    set_background(png_file="background_2.jpg")
     css_texte(color="#014b4b", size="43px", texte="Analyse des données")
     css_texte(color="#014b4b", size="25px", texte="Inclusion Financière")
     side_bar_background()
@@ -131,7 +133,6 @@ def visualisation():
     st.title("")
     st.title("")   
     
-
     # Graphique concernant l'ouverture de compte par âge.
     if selected_option == "Age":   
         css_texte(color="#014b4b", size="25px", texte="Autorisation à l'ouverture d'un compte par âge")
