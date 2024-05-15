@@ -7,9 +7,42 @@ import matplotlib.pyplot as plt
 from pages.Visualisation import *
 
 
+# Fonction permettent d'afficher les logs.
+def apply_custom_css(table: str):
+    log = table[table['Classe'] == 1][['LOG', 'Model']]
+    
+    st.markdown(
+        """
+        <style>
+            .custom-block2 {
+                background-color: #014b4b;   
+                border-radius: 10px;
+                color: white;
+                padding: 15px;
+                justify-content: center;
+                align-items: center;
+                width: 700px;
+                height: 220px;
+                font-size: 18px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-
-
+    # Affichage du contenu avec le style personnalisé
+    st.markdown(
+        f"""
+            <div class='custom-block2'>
+                <p style="font-size:20px;color:white;font-weight: ;"> Modèle {log["Model"].values[0]} :  <span style=color:#d4e8e5;font-size:21px;>{log["LOG"].values[0]}</span></p>
+                <p style="font-size:20px;color:white;font-weight: ;"> Modèle {log["Model"].values[1]} :  <span style=color:#d4e8e5;font-size:21px;>{log["LOG"].values[1]} </span></p>
+                <p style="font-size:20px;color:white;font-weight: ;"> Modèle {log["Model"].values[2]} :  <span style=color:#d4e8e5;font-size:21px;>{log["LOG"].values[2]} </span></p>
+                <p style="font-size:20px;color:white;font-weight: ;"> Modèle 2019 :  <span style=color:#FFCCCB;font-size:21px;>Attention ! le modèle subit une dégradation significative</span></p>
+            </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
 # ===================================================================>
 
 # Fonction permettent d'accélerer l'affichage des performances.
@@ -52,7 +85,6 @@ def show_metrics_performance(data, classe: int):
     else:
         classe = 1
     
-    css_texte(color="#014b4b", size="20px", texte=f"Métriques et Support")
     data["Model"] = data["Model"].astype(str)
     performance_year2016           = data[(data["Model"] == "2016") & (data["Classe"] == classe)]
     performance_year2016_2017      = data[(data["Model"] == "2017") & (data["Classe"] == classe)]
@@ -77,28 +109,28 @@ def show_metrics_performance(data, classe: int):
 
 
 def monitoring():
-    set_background(png_file="background_2.jpg")
+    set_background(png_file="beige.jpg")
     side_bar_background()
     selectbox_css()
     
 
-    # Récupération des données de performances.
+    # ===================== Comparaison des métriques des modèles.
     performance = save_csv_or_get_data_performance()
-
-    # Titre de la page.
-    css_texte(color="#014b4b", size="25px", texte="Evolution du modèle")
-    
-    # L'utilisateur choisit une métrique.
+    css_texte(color="#014b4b", size="30px", texte="Evolution du modèle")
     selected_metric = st.selectbox('**Veuillez choisir la métrique**', ['precision', 'recall', 'f1score'])
-    
-    # Visualisation.
     barplot_performance(selected_metric=selected_metric, data=performance)
     classe = st.selectbox("**Veuillez choisir une classe**", ["Refusé", "Accepté"])
     st.title("")
+    
+    # ===================== Visualisation des métriques du modèles.
+    css_texte(color="#014b4b", size="25px", texte=f"Métriques et Support")
     show_metrics_performance(data=performance, classe=classe)
     st.title("")
     
-
+    # ===================== Log des modèles.
+    css_texte(color="#014b4b", size="25px", texte="Suivi des journaux d'évolution du modèle")
+    apply_custom_css(table=performance)
+    
 
    
    

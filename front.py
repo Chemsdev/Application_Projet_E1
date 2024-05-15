@@ -186,3 +186,5 @@ def css_recapitulatif(user_inputs):
         """,
         unsafe_allow_html=True
     )
+    
+

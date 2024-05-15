@@ -22,7 +22,13 @@ def prepare_data_to_viz(data):
         'Divorced/Seperated': 'Divorcé(e)',
         "Don't know": 'Ne sais pas'  
     }
-    data['etat_civil'] = data['etat_civil'].replace(mapping)
+    mapping = {
+        'Female': 'Femme', 
+        'Male'  : 'Homme',  
+    }
+    data['etat_civil'] = data['etat_civil'].replace(mapping, inplace=True)
+    data['sexe'] = data['sexe'].replace(mapping, inplace=True)
+    
     return data
 
 # Fonction permettent d'accélerer l'affichage de la données.
@@ -110,7 +116,7 @@ def count_plot(y: str, hue: str, colors: str, data, figsize:list, font_size=18):
 # =================================================================================================================================>
 
 def visualisation():
-    set_background(png_file="background_2.jpg")
+    set_background(png_file="beige.jpg")
     css_texte(color="#014b4b", size="43px", texte="Analyse des données")
     css_texte(color="#014b4b", size="25px", texte="Inclusion Financière")
     side_bar_background()

@@ -13,7 +13,7 @@ def main():
     end_form = False
     col1, col2 = st.columns(2)
     side_bar_background()
-    set_background(png_file="background.jpg")
+    set_background(png_file="beige.jpg")
     
     # Formulaire.
     with col1:      
